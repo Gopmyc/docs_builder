@@ -44,3 +44,56 @@ void write_docblock_html(FILE* fOut, DocBlock* doc)
 	);
 }
 
+//
+// ┌────────────────────────────┐
+// │ TREE GENERATOR (RECURSIVE) │
+// └────────────────────────────┘
+//
+void	writeTree(FILE *fOut, const char *sPath, int iDepth)
+{
+	struct _finddata_t sEntry;
+	char sSearch[4096];
+	char sFullPath[4096];
+	long hFind;
+	int bFirst = 1;
+
+	sprintf(sSearch, "%s\\*", sPath);
+	hFind = _findfirst(sSearch, &sEntry);
+	if (hFind == -1L)
+	{
+		logError("Directory listing failed", sPath);
+		return;
+	}
+
+	do
+	{
+		if (strcmp(sEntry.name, ".") == 0 || strcmp(sEntry.name, "..") == 0)
+			continue;
+
+		sprintf(sFullPath, "%s\\%s", sPath, sEntry.name);
+
+		if (isDirectory(sFullPath))
+		{
+			if (!bFirst)
+				fprintf(fOut, ",\n");
+			bFirst = 0;
+			writeIndent(fOut, iDepth);
+			fprintf(fOut, "\"%s\": {\n", sEntry.name);
+			writeTree(fOut, sFullPath, iDepth + 1);
+			fprintf(fOut, "\n");
+			writeIndent(fOut, iDepth);
+			fprintf(fOut, "}");
+		}
+		else if (endsWithHtml(sEntry.name))
+		{
+			if (!bFirst)
+				fprintf(fOut, ",\n");
+			bFirst = 0;
+			writeIndent(fOut, iDepth);
+			fprintf(fOut, "\"%s\": null", sEntry.name);
+		}
+	}
+	while (_findnext(hFind, &sEntry) == 0);
+
+	_findclose(hFind);
+}
