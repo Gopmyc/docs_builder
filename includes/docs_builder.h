@@ -105,3 +105,9 @@ int			contains_doc_comment(const char* filepath);
 void		write_docblock_html(FILE* fOut, DocBlock* doc);
 int			scan_and_create_docs(const char* base, const char* rel);
 
+//
+// ┌──────────────────────────────┐
+// │ MANIFEST GENERATION FUNCTION │
+// └──────────────────────────────┘
+//
+void		writeTree(FILE *fOut, const char *sPath, int iDepth);
