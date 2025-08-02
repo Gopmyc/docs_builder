@@ -44,3 +44,15 @@
 #define COLOR_SUCCESS	10
 #define COLOR_ERROR		12
 #define COLOR_INFO		11
+
+//
+// ┌───────────────┐
+// │ CUSTOM STRUCT │
+// └───────────────┘
+//
+typedef struct Param
+{
+	char			type[64];
+	char			desc[256];
+	struct Param*	next;
+} Param;
