@@ -63,3 +63,12 @@ typedef struct Return
 	char			desc[256];
 	struct Return*	next;
 } Return;
+
+typedef struct DocBlock
+{
+	char				name[128];
+	char				desc[512];
+	Param*				params;
+	Return*				returns;
+	struct DocBlock*	next;
+} DocBlock;
