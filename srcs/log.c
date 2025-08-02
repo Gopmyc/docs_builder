@@ -17,3 +17,11 @@ void	logError(const char *sMsg, const char *sDetail)
 	fprintf(stderr, "[ERROR] %s: %s\n", sMsg, sDetail ? sDetail : "N/A");
 	setConsoleColor(COLOR_RESET);
 }
+
+void	logInfo(const char *sMsg, const char *sDetail)
+{
+	setConsoleColor(COLOR_INFO);
+	printf("[INFO]  %s: %s\n", sMsg, sDetail ? sDetail : "...");
+	setConsoleColor(COLOR_RESET);
+}
+
