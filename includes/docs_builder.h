@@ -56,3 +56,10 @@ typedef struct Param
 	char			desc[256];
 	struct Param*	next;
 } Param;
+
+typedef struct Return
+{
+	char			type[64];
+	char			desc[256];
+	struct Return*	next;
+} Return;
