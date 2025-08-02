@@ -46,3 +46,22 @@ void free_docblocks(DocBlock* head)
 	}
 }
 
+void create_directory_recursive(const char* path)
+{
+	char tmp[MAX_PATH];
+	size_t len = strlen(path);
+	if (len == 0) return;
+
+	if (path[len - 1] == '\\' || path[len - 1] == '/')
+		len--;
+	memcpy(tmp, path, len);
+
+	tmp[len] = '\0';
+	for (size_t i = 0; i < len; ++i)
+		if (tmp[i] == '\\' || tmp[i] == '/') {
+			tmp[i] = '\0';
+			CreateDirectoryA(tmp, NULL);
+			tmp[i] = '\\';
+		}
+	CreateDirectoryA(tmp, NULL);
+}
