@@ -27,3 +27,22 @@ int	isDirectory(const char *sPath)
 	return _stat(sPath, &sStat) == 0 && (sStat.st_mode & _S_IFDIR);
 }
 
+//
+// ┌───────────────────────┐
+// │ DOCS GENERATION UTILS │
+// └───────────────────────┘
+//
+void free_docblocks(DocBlock* head)
+{
+	while (head) {
+		DocBlock* tmp = head->next;
+		Param* p = head->params;
+		while (p) { Param* ptmp = p->next; free(p); p = ptmp; }
+
+		Return* r = head->returns;
+		while (r) { Return* rtmp = r->next; free(r); r = rtmp; }
+
+		free(head); head = tmp;
+	}
+}
+
