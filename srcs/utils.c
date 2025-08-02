@@ -20,3 +20,10 @@ int	endsWithHtml(const char *sName)
 		strcmp(sName + iLen - iExtLen, EXTENSION) == 0 &&
 		strcmp(sName, EXCLUDE_FILE) != 0;
 }
+
+int	isDirectory(const char *sPath)
+{
+	struct _stat sStat;
+	return _stat(sPath, &sStat) == 0 && (sStat.st_mode & _S_IFDIR);
+}
+
