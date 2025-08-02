@@ -81,3 +81,14 @@ typedef struct DocBlock
 void		writeIndent(FILE *fOut, int iDepth);
 int			endsWithHtml(const char *sName);
 int			isDirectory(const char *sPath);
+
+//
+// ┌──────────────┐
+// │ LOG FUNCTION │
+// └──────────────┘
+//
+void		setConsoleColor(WORD wColor);
+void		logError(const char *sMsg, const char *sDetail);
+void		logInfo(const char *sMsg, const char *sDetail);
+void		logSuccess(const char *sMsg, const char *sDetail);
+
