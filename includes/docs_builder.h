@@ -92,3 +92,16 @@ void		logError(const char *sMsg, const char *sDetail);
 void		logInfo(const char *sMsg, const char *sDetail);
 void		logSuccess(const char *sMsg, const char *sDetail);
 
+
+//
+// ┌──────────────────────────┐
+// │ DOCS GENERATION FUNCTION │
+// └──────────────────────────┘
+//
+void		free_docblocks(DocBlock* head);
+void		create_directory_recursive(const char* path);
+DocBlock*	parse_doc_blocks(FILE* f);
+int			contains_doc_comment(const char* filepath);
+void		write_docblock_html(FILE* fOut, DocBlock* doc);
+int			scan_and_create_docs(const char* base, const char* rel);
+
