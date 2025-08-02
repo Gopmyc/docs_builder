@@ -97,3 +97,17 @@ DocBlock* parse_doc_blocks(FILE* f)
 	}
 	return head;
 }
+
+int contains_doc_comment(const char* filepath)
+{
+	FILE* f = fopen(filepath, "r");
+	if (!f) return 0;
+
+	char line[MAX_LINE];
+	int found = 0;
+	while (fgets(line, sizeof(line), f))
+		if (strstr(line, "@name")) { found = 1; break; }
+
+	fclose(f);
+	return found;
+}
