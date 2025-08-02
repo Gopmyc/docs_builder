@@ -21,3 +21,17 @@
 #include <direct.h>
 #include <sys/stat.h>
 
+//
+// ┌───────────────┐
+// │ CONFIG MACROS │
+// └───────────────┘
+//
+#define INPUT_FOLDER	"lua"
+#define OUTPUT_FOLDER	"docs\\root"
+#define MAX_LINE		1024
+#define EXTENSION		".html"
+#define EXCLUDE_FILE	"index.html"
+#define OUTPUT_FILE		"manifest.js"
+#define ROOT_PATH		"docs/root"
+#define INDENT_WIDTH	1
+
