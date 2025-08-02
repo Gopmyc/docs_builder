@@ -25,3 +25,9 @@ void	logInfo(const char *sMsg, const char *sDetail)
 	setConsoleColor(COLOR_RESET);
 }
 
+void	logSuccess(const char *sMsg, const char *sDetail)
+{
+	setConsoleColor(COLOR_SUCCESS);
+	printf("[OK]    %s: %s\n", sMsg, sDetail ? sDetail : "Done");
+	setConsoleColor(COLOR_RESET);
+}
