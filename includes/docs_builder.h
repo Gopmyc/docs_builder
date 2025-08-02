@@ -35,3 +35,12 @@
 #define ROOT_PATH		"docs/root"
 #define INDENT_WIDTH	1
 
+//
+// ┌───────────────────┐
+// │ COLOR DEFINITIONS │
+// └───────────────────┘
+//
+#define COLOR_RESET		7
+#define COLOR_SUCCESS	10
+#define COLOR_ERROR		12
+#define COLOR_INFO		11
