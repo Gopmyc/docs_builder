@@ -29,7 +29,7 @@ DocBlock* parse_doc_blocks(FILE* f)
 				current = newBlock;
 			}
 		} else {
-			if (strstr(line, "]]")) { inBlock = 0; current = NULL; }
+			if (strstr(line, "]]")) { inBlock = 0; }
 			else if (current) {
 				char* p;
 
