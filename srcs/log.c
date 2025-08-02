@@ -10,3 +10,10 @@ void	setConsoleColor(WORD wColor)
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, wColor);
 }
+
+void	logError(const char *sMsg, const char *sDetail)
+{
+	setConsoleColor(COLOR_ERROR);
+	fprintf(stderr, "[ERROR] %s: %s\n", sMsg, sDetail ? sDetail : "N/A");
+	setConsoleColor(COLOR_RESET);
+}
