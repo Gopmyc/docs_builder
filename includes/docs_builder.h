@@ -72,3 +72,12 @@ typedef struct DocBlock
 	Return*				returns;
 	struct DocBlock*	next;
 } DocBlock;
+
+//
+// ┌──────────────────┐
+// │ UTILITY FUNCTION │
+// └──────────────────┘
+//
+void		writeIndent(FILE *fOut, int iDepth);
+int			endsWithHtml(const char *sName);
+int			isDirectory(const char *sPath);
