@@ -37,5 +37,28 @@ int main(void)
 	fprintf(fOut, "\n};\n");
 	fclose(fOut);
 
-	return (logSuccess("Manifest generated", sOutputPath), EXIT_SUCCESS);
+	logSuccess("Manifest generated", sOutputPath);
+
+	/* ───────────────────────────── */
+	/*        YAML CONFIG LOAD       */
+	/* ───────────────────────────── */
+
+	logInfo("Loading YAML config", "docs_config.yaml");
+
+	ProjectConfig config;
+
+	if (!load_config_yaml("docs_config.yaml", &config))
+		return (logError("Failed to load config", "docs_config.yaml"), 1);
+
+	logSuccess("Config loaded", NULL);
+
+	/* ───────────────────────────── */
+	/*      INDEX GENERATION         */
+	/* ───────────────────────────── */
+
+	logInfo("Generating index.html", NULL);
+	generate_index_html(&config);
+	logSuccess("index.html generated", "docs/index.html");
+
+	return (EXIT_SUCCESS);
 }
