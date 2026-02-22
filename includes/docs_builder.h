@@ -73,6 +73,21 @@ typedef struct DocBlock
 	struct DocBlock*	next;
 } DocBlock;
 
+typedef struct ThemeConfig
+{
+	char primary_color[32];
+	char sidebar_title[128];
+} ThemeConfig;
+
+typedef struct ProjectConfig
+{
+	char title[128];
+	char description[512];
+	char license_name[128];
+	char license_url[256];
+	ThemeConfig theme;
+} ProjectConfig;
+
 //
 // ┌──────────────────┐
 // │ UTILITY FUNCTION │
@@ -111,3 +126,18 @@ int			scan_and_create_docs(const char* base, const char* rel);
 // └──────────────────────────────┘
 //
 void		writeTree(FILE *fOut, const char *sPath, int iDepth);
+
+//
+// ┌─────────────────────────────────┐
+// │ HTML/JS/CSS GENERATION FUNCTION │
+// └─────────────────────────────────┘
+//
+void		generate_index_html(const ProjectConfig* config);
+void		generate_main_js(void);
+
+//
+// ┌───────────────┐
+// │ YAML FUNCTION │
+// └───────────────┘
+//
+int			load_config_yaml(const char* path, ProjectConfig* config);
