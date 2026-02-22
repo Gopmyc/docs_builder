@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<aside class="sidebar"></aside>
+			<main class="content">
+<section id="foo">
+	<h2>foo</h2>
+	<p>
+		<li><strong>@desc :</strong></li>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Test function for documentation generation
+	</p>
+	<ul class="meta">
+		<li><strong>@param :</strong></li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;<b>{boolean}</b> : A boolean parameter to test the function</li>
+		<li><strong>@return :</strong></li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;<b>{boolean}</b> : Returns the same boolean value passed as a parameter</li>
+	</ul>
+	<div class="code-block">
+		<button class="copy-btn">📋</button>
+		<pre><code>
+		-- Some Code
+		</code></pre>
+	</div>
+</section>
+			</main>
+		</div>
+		<script>(()=>{let p=window.location.pathname;p=p.endsWith('/')?p.slice(0,-1):p;const a=p.split('/').filter(Boolean),i=a.findIndex(e=>e.toLowerCase()=='docs'),d=i>=0?a.length-(i+1):a.length-1,b='../'.repeat(d>0?d:0),s=b+'docs/style.css',j=b+'docs/main.js',l=document.createElement('link');l.rel='stylesheet';l.href=s;document.head.appendChild(l);window.addEventListener('DOMContentLoaded',()=>{const c=document.createElement('script');c.src=j;document.body.appendChild(c);});})();</script>
+	</body>
+</html>
