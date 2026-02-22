@@ -1,0 +1,10 @@
+TITLE:        Docs Builder
+DESCRIPTION:  Static Lua documentation generator
+
+LICENSE:
+  NAME: MIT License
+  URL:  https://opensource.org/licenses/MIT
+
+THEME:
+  PRIMARY_COLOR:  "#4f46e5"
+  SIDEBAR_TITLE:  "📘 Docs"
