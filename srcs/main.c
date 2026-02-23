@@ -5,6 +5,8 @@
 // │ MAIN │
 // └──────┘
 //
+
+// TODO: Create a version control system, a search bar, and a client/server differentiation system
 int main(void)
 {
 	logInfo("Starting root folder generation", NULL);
