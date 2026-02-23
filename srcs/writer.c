@@ -49,7 +49,7 @@ void write_docblock_html(FILE* fOut, DocBlock* doc)
 // │ TREE GENERATOR (RECURSIVE) │
 // └────────────────────────────┘
 //
-void	writeTree(FILE *fOut, const char *sPath, int iDepth)
+void	writeTree(FILE *fOut, const char *sPath, int iDepth, const ProjectConfig* config)
 {
 	struct _finddata_t sEntry;
 	char sSearch[4096];
@@ -77,19 +77,19 @@ void	writeTree(FILE *fOut, const char *sPath, int iDepth)
 			if (!bFirst)
 				fprintf(fOut, ",\n");
 			bFirst = 0;
-			writeIndent(fOut, iDepth);
+			writeIndent(fOut, iDepth, config);
 			fprintf(fOut, "\"%s\": {\n", sEntry.name);
-			writeTree(fOut, sFullPath, iDepth + 1);
+			writeTree(fOut, sFullPath, iDepth + 1, config);
 			fprintf(fOut, "\n");
-			writeIndent(fOut, iDepth);
+			writeIndent(fOut, iDepth, config);
 			fprintf(fOut, "}");
 		}
-		else if (endsWithHtml(sEntry.name))
+		else if (endsWithHtml(sEntry.name, config))
 		{
 			if (!bFirst)
 				fprintf(fOut, ",\n");
 			bFirst = 0;
-			writeIndent(fOut, iDepth);
+			writeIndent(fOut, iDepth, config);
 			fprintf(fOut, "\"%s\": null", sEntry.name);
 		}
 	}
