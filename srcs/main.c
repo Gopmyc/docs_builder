@@ -9,24 +9,33 @@
 // TODO: Create a version control system, a search bar, and a client/server differentiation system
 int main(void)
 {
+	/* ───────────────────────────── */
+	/*        YAML CONFIG LOAD       */
+	/* ───────────────────────────── */
+	ProjectConfig config;
+
+	if (!load_config_yaml("docs_config.yaml", &config))
+		return (printf("Failed to load 'docs_config.yaml'"), 1);
+
+	set_runtime_config(&config.runtime);
 	logInfo("Starting root folder generation", NULL);
-	CreateDirectoryA(OUTPUT_FOLDER, NULL);
-	logSuccess("Creation root folder success in ", OUTPUT_FOLDER);
+	CreateDirectoryA(config.runtime.output_folder, NULL);
+	logSuccess("Creation root folder success in ", config.runtime.output_folder);
 
 	logInfo("Starting docs generation", NULL);
-	int result = scan_and_create_docs(INPUT_FOLDER, "");
+	int result = scan_and_create_docs(config.runtime.input_folder, "", &config);
 	if (result)
-		logSuccess("Filtered folder structure with docs placeholders generated in ", OUTPUT_FOLDER);
+		logSuccess("Filtered folder structure with docs placeholders generated in ", config.runtime.output_folder);
 	else
 		logError("No Lua files with doc comments found.", NULL);
 
 	logInfo("Starting manifest generation", NULL);
 
-	if (!isDirectory(ROOT_PATH))
-		return (logError("ROOT_PATH not found", ROOT_PATH), 1);
+	if (!isDirectory(config.runtime.root_path))
+		return (logError("ROOT_PATH not found", config.runtime.root_path), 1);
 
 	char sOutputPath[4096];
-	snprintf(sOutputPath, sizeof(sOutputPath), "%s\\%s", ROOT_PATH, OUTPUT_FILE);
+	snprintf(sOutputPath, sizeof(sOutputPath), "%s\\%s", config.runtime.root_path, config.runtime.output_file);
 
 	FILE *fOut = fopen(sOutputPath, "w");
 	if (!fOut)
@@ -35,24 +44,11 @@ int main(void)
 	logInfo("Writing to file", sOutputPath);
 
 	fprintf(fOut, "const manifest = {\n");
-	writeTree(fOut, ROOT_PATH, 1);
+	writeTree(fOut, config.runtime.root_path, 1, &config);
 	fprintf(fOut, "\n};\n");
 	fclose(fOut);
 
 	logSuccess("Manifest generated", sOutputPath);
-
-	/* ───────────────────────────── */
-	/*        YAML CONFIG LOAD       */
-	/* ───────────────────────────── */
-
-	logInfo("Loading YAML config", "docs_config.yaml");
-
-	ProjectConfig config;
-
-	if (!load_config_yaml("docs_config.yaml", &config))
-		return (logError("Failed to load config", "docs_config.yaml"), 1);
-
-	logSuccess("Config loaded", NULL);
 
 	/* ───────────────────────────── */
 	/*      INDEX GENERATION         */
