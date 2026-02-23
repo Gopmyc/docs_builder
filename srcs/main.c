@@ -7,6 +7,22 @@
 //
 
 // TODO: Create a version control system, a search bar, and a client/server differentiation system
+void extract_parent_dir(const char* fullPath, char* outDir, size_t outSize)
+{
+	const char* jsPos = strstr(fullPath, ".js");
+	if (!jsPos) { outDir[0] = '\0'; return; }
+
+	const char* slashPos = jsPos;
+	while (slashPos > fullPath && *slashPos != '/' && *slashPos != '\\')
+		slashPos--;
+
+	size_t len = (slashPos >= fullPath) ? (size_t)(slashPos - fullPath) : 0;
+	if (len >= outSize) len = outSize - 1;
+
+	memcpy(outDir, fullPath, len);
+	outDir[len] = '\0';
+}
+
 int main(void)
 {
 	ProjectConfig config;
@@ -17,7 +33,7 @@ int main(void)
 	set_runtime_config(&config.runtime);
 
 	logInfo("Creating output folder", config.runtime.output_folder);
-	CreateDirectoryA(config.runtime.output_folder, NULL);
+	create_directory_recursive(config.runtime.output_folder);
 	logSuccess("Output folder ready at", config.runtime.output_folder);
 
 	logInfo("Starting docs generation", NULL);
@@ -34,6 +50,11 @@ int main(void)
 
 	char manifestPath[4096];
 	snprintf(manifestPath, sizeof(manifestPath), "%s\\%s", config.runtime.output_folder, config.runtime.manifest_path);
+
+	char manifestDir[4096];
+	extract_parent_dir(manifestPath, manifestDir, sizeof(manifestDir));
+	if (manifestDir[0] != '\0')
+		create_directory_recursive(manifestDir);
 
 	FILE* fOut = fopen(manifestPath, "w");
 	if (!fOut)
