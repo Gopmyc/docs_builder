@@ -8,8 +8,10 @@
 
 void generate_index_html(const ProjectConfig* config)
 {
-	char path[512];
-	snprintf(path, sizeof(path), "docs\\index.html");
+	char path[MAX_PATH];
+	snprintf(path, sizeof(path), "%s\\index.html", config->runtime.output_folder);
+
+	create_directory_recursive(config->runtime.output_folder);
 
 	FILE* f = fopen(path, "w");
 	if (!f)
@@ -52,15 +54,17 @@ void generate_index_html(const ProjectConfig* config)
 		"				</section>\n"
 		"			</main>\n"
 		"		</div>\n"
-		"		<script src=\"root/manifest.js\"></script>\n"
-		"		<script src=\"main.js\"></script>\n"
+		"		<script src=\"%s\"></script>\n"
+		"		<script src=\"%s\"></script>\n"
 		"	</body>\n"
 		"</html>\n",
 		config->title,
 		config->title,
 		config->description,
 		config->license_url,
-		config->license_name
+		config->license_name,
+		config->runtime.manifest_path,
+		config->runtime.main_js_path
 	);
 
 	fclose(f);
@@ -69,10 +73,15 @@ void generate_index_html(const ProjectConfig* config)
 
 void generate_main_js(const ProjectConfig* config)
 {
-	FILE* f = fopen("docs\\main.js", "w");
+	char path[MAX_PATH];
+	snprintf(path, sizeof(path), "%s\\main.js", config->runtime.output_folder);
+
+	create_directory_recursive(config->runtime.output_folder);
+
+	FILE* f = fopen(path, "w");
 	if (!f)
 	{
-		logError("Failed to create main.js", "docs\\main.js");
+		logError("Failed to create main.js", path);
 		return;
 	}
 
@@ -105,20 +114,20 @@ void generate_main_js(const ProjectConfig* config)
 	);
 
 	fclose(f);
-	logSuccess("main.js generated", "docs\\main.js");
+	logSuccess("main.js generated", path);
 }
 
 void generate_style_css(const ProjectConfig* config)
 {
-	char sOutputPath[MAX_PATH];
-	snprintf(sOutputPath, sizeof(sOutputPath), "docs\\style.css");
+	char path[MAX_PATH];
+	snprintf(path, sizeof(path), "%s\\style.css", config->runtime.output_folder);
 
-	CreateDirectoryA("docs", NULL);
+	create_directory_recursive(config->runtime.output_folder);
 
-	FILE* f = fopen(sOutputPath, "w");
+	FILE* f = fopen(path, "w");
 	if (!f) 
 	{
-		logError("Failed to create style.css", sOutputPath);
+		logError("Failed to create style.css", path);
 		return;
 	}
 
@@ -165,7 +174,6 @@ void generate_style_css(const ProjectConfig* config)
 		".theme-btn { width: 40px; height: 40px; border-radius: 50%%; border: none; font-size: 20px; cursor: pointer; transition: all 0.3s ease; }\n"
 	);
 
-	// --- EXISTING STYLES ---
 	fprintf(f,
 		"body {margin:0;font-family:'Inter',sans-serif;background:linear-gradient(to right,var(--bg-gradient-start),var(--bg-gradient-end));color:var(--text-main);}\n"
 		".container{display:flex;width:100%%;min-height:100vh;}\n"
@@ -204,5 +212,5 @@ void generate_style_css(const ProjectConfig* config)
 	);
 
 	fclose(f);
-	logSuccess("style.css generated", sOutputPath);
+	logSuccess("style.css generated", path);
 }
