@@ -21,29 +21,7 @@
 #include <direct.h>
 #include <sys/stat.h>
 
-//
-// ┌───────────────┐
-// │ CONFIG MACROS │
-// └───────────────┘
-//
-#define INPUT_FOLDER	"lua"
-#define OUTPUT_FOLDER	"docs\\root"
 #define MAX_LINE		1024
-#define EXTENSION		".html"
-#define EXCLUDE_FILE	"index.html"
-#define OUTPUT_FILE		"manifest.js"
-#define ROOT_PATH		"docs/root"
-#define INDENT_WIDTH	1
-
-//
-// ┌───────────────────┐
-// │ COLOR DEFINITIONS │
-// └───────────────────┘
-//
-#define COLOR_RESET		7
-#define COLOR_SUCCESS	10
-#define COLOR_ERROR		12
-#define COLOR_INFO		11
 
 //
 // ┌───────────────┐
@@ -64,14 +42,30 @@ typedef struct Return
 	struct Return*	next;
 } Return;
 
+typedef struct Example
+{
+	char code[2048];
+} Example;
+
 typedef struct DocBlock
 {
-	char				name[128];
-	char				desc[512];
-	Param*				params;
-	Return*				returns;
-	struct DocBlock*	next;
+	char name[128];
+	char desc[512];
+	char example[2048];
+
+	Param* params;
+	Return* returns;
+
+	struct DocBlock* next;
+
 } DocBlock;
+
+typedef struct DDocFile
+{
+	char global_description[2048];
+	DocBlock* blocks;
+
+} DDocFile;
 
 typedef struct ThemeConfig
 {
@@ -100,14 +94,35 @@ typedef struct ThemeIcons {
     const char* lightIcon;
 } ThemeIcons;
 
+typedef struct RuntimeConfig
+{
+	char input_folder[256];
+	char output_folder[256];
+	char output_file[128];
+	char root_path[256];
+	char extension[32];
+	char exclude_file[128];
+	int  indent_width;
+
+	int  color_reset;
+	int  color_success;
+	int  color_error;
+	int  color_info;
+
+} RuntimeConfig;
+
 typedef struct ProjectConfig
 {
 	char title[128];
 	char description[512];
 	char license_name[128];
 	char license_url[256];
+
 	ThemeConfig theme;
 	ThemeIcons themeIcons;
+
+	RuntimeConfig runtime;
+
 } ProjectConfig;
 
 //
@@ -115,8 +130,8 @@ typedef struct ProjectConfig
 // │ UTILITY FUNCTION │
 // └──────────────────┘
 //
-void		writeIndent(FILE *fOut, int iDepth);
-int			endsWithHtml(const char *sName);
+void		writeIndent(FILE *fOut, int iDepth, const ProjectConfig* config);
+int			endsWithHtml(const char *sName, const ProjectConfig* config);
 int			isDirectory(const char *sPath);
 
 //
@@ -124,6 +139,7 @@ int			isDirectory(const char *sPath);
 // │ LOG FUNCTION │
 // └──────────────┘
 //
+void		set_runtime_config(RuntimeConfig* runtime);
 void		setConsoleColor(WORD wColor);
 void		logError(const char *sMsg, const char *sDetail);
 void		logInfo(const char *sMsg, const char *sDetail);
@@ -140,14 +156,14 @@ void		create_directory_recursive(const char* path);
 DocBlock*	parse_doc_blocks(FILE* f);
 int			contains_doc_comment(const char* filepath);
 void		write_docblock_html(FILE* fOut, DocBlock* doc);
-int			scan_and_create_docs(const char* base, const char* rel);
+int			scan_and_create_docs(const char* base, const char* rel, const ProjectConfig* config);
 
 //
 // ┌──────────────────────────────┐
 // │ MANIFEST GENERATION FUNCTION │
 // └──────────────────────────────┘
 //
-void		writeTree(FILE *fOut, const char *sPath, int iDepth);
+void		writeTree(FILE *fOut, const char *sPath, int iDepth, const ProjectConfig* config);
 
 //
 // ┌─────────────────────────────────┐
