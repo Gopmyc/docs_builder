@@ -5,20 +5,20 @@
 // │ UTILITY FUNCS │
 // └───────────────┘
 //
-void	writeIndent(FILE *fOut, int iDepth)
+void	writeIndent(FILE *fOut, int iDepth, const ProjectConfig* config)
 {
-	for (int i = 0; i < iDepth * INDENT_WIDTH; i++)
+	for (int i = 0; i < iDepth * config->runtime.indent_width; i++)
 		fputc('\t', fOut);
 }
 
-int	endsWithHtml(const char *sName)
+int	endsWithHtml(const char *sName, const ProjectConfig* config)
 {
 	size_t iLen = strlen(sName);
-	size_t iExtLen = strlen(EXTENSION);
+	size_t iExtLen = strlen(config->runtime.extension);
 
 	return iLen >= iExtLen &&
-		strcmp(sName + iLen - iExtLen, EXTENSION) == 0 &&
-		strcmp(sName, EXCLUDE_FILE) != 0;
+		strcmp(sName + iLen - iExtLen, config->runtime.extension) == 0 &&
+		strcmp(sName, config->runtime.exclude_file) != 0;
 }
 
 int	isDirectory(const char *sPath)
