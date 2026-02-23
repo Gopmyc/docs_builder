@@ -42,30 +42,14 @@ typedef struct Return
 	struct Return*	next;
 } Return;
 
-typedef struct Example
-{
-	char code[2048];
-} Example;
-
 typedef struct DocBlock
 {
-	char name[128];
-	char desc[512];
-	char example[2048];
-
-	Param* params;
-	Return* returns;
-
-	struct DocBlock* next;
-
+	char				name[128];
+	char				desc[512];
+	Param*				params;
+	Return*				returns;
+	struct DocBlock*	next;
 } DocBlock;
-
-typedef struct DDocFile
-{
-	char global_description[2048];
-	DocBlock* blocks;
-
-} DDocFile;
 
 typedef struct ThemeConfig
 {
