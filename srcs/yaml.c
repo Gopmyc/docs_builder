@@ -41,8 +41,6 @@ static void assign_root_key(ProjectConfig* cfg, const char* key, const char* val
 		strncpy(cfg->runtime.input_folder, value, sizeof(cfg->runtime.input_folder) - 1);
 	else if (strcmp(key, "OUTPUT_FOLDER") == 0)
 		strncpy(cfg->runtime.output_folder, value, sizeof(cfg->runtime.output_folder) - 1);
-	else if (strcmp(key, "OUTPUT_FILE") == 0)
-		strncpy(cfg->runtime.output_file, value, sizeof(cfg->runtime.output_file) - 1);
 	else if (strcmp(key, "INDENT_WIDTH") == 0)
 		cfg->runtime.indent_width = atoi(value);
 	else if (strcmp(key, "EXTENSION") == 0)
