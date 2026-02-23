@@ -1,0 +1,44 @@
+@GLOBAL_DESCRIPTION	: This file contains the documentation for the 'foo' function,
+	which is used to test the documentation generation process.
+	The function takes a boolean and a string as parameters and returns the boolean value.
+		The string parameter is ignored in the function logic.
+
+@NAME	: foo
+@DESC	: Test function for documentation generation
+@PARAM	:
+	- {boolean} : A boolean value to be returned by the function
+	- {string} : A string value to be ignored by the function
+@RETURN	:
+	- {boolean} : The boolean value passed as a parameter
+@EXAMPLE	:
+```lua
+local result = foo(true, "This string will be ignored")
+print(result) -- Output: true
+BlaBlaBla
+BlaBlaBla
+BlaBlaBla
+BlaBlaBla
+BlaBlaBla
+BlaBlaBla
+BlaBlaBla
+BlaBlaBla
+BlaBlaBla
+jdhzauihdzaugd
+
+ozahdzudyiaz
+
+idhaiud
+```
+
+@NAME	: bar
+@DESC	: Another test function for documentation generation
+@PARAM	:
+	- {boolean} : A boolean value to be returned by the function
+	- {string} : A string value to be ignored by the function
+@RETURN	:
+	- {boolean} : The boolean value passed as a parameter
+@EXAMPLE	:
+```lua
+local result = bar(false, "This string will also be ignored")
+print(result) -- Output: false
+```
