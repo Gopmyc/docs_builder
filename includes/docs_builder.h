@@ -75,9 +75,30 @@ typedef struct DocBlock
 
 typedef struct ThemeConfig
 {
-	char primary_color[32];
-	char sidebar_title[128];
+	char mode[16];
+	char bg_main[16];
+	char bg_gradient_start[16];
+	char bg_gradient_end[16];
+	char bg_panel[16];
+	char bg_sidebar[16];
+	char bg_hover[16];
+	char accent[16];
+	char accent_alt[16];
+	char text_main[16];
+	char text_muted[16];
+	char text_subtle[16];
+	char border_soft[16];
+	char radius_lg[8];
+	char radius_md[8];
+	char transition_fast[16];
+	char transition_normal[16];
 } ThemeConfig;
+
+typedef struct ThemeIcons {
+    const char* defaultIcon;
+    const char* darkIcon;
+    const char* lightIcon;
+} ThemeIcons;
 
 typedef struct ProjectConfig
 {
@@ -86,6 +107,7 @@ typedef struct ProjectConfig
 	char license_name[128];
 	char license_url[256];
 	ThemeConfig theme;
+	ThemeIcons themeIcons;
 } ProjectConfig;
 
 //
@@ -133,7 +155,8 @@ void		writeTree(FILE *fOut, const char *sPath, int iDepth);
 // └─────────────────────────────────┘
 //
 void		generate_index_html(const ProjectConfig* config);
-void		generate_main_js(void);
+void		generate_main_js(const ProjectConfig* config);
+void		generate_style_css(const ProjectConfig* config);
 
 //
 // ┌───────────────┐
