@@ -93,7 +93,6 @@ typedef struct RuntimeConfig
 {
 	char input_folder[256];
 	char output_folder[256];
-	char output_file[128];
 	char root_path[256];
 	char extension[32];
 	char exclude_file[128];
