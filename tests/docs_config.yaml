@@ -1,10 +1,29 @@
-TITLE:        Docs Builder
-DESCRIPTION:  Static Lua documentation generator
+# PROJET
+TITLE:        "Docs Builder"
+DESCRIPTION:  "Static Lua documentation generator"
+LICENSE_NAME: "MIT License"
+LICENSE_URL:  "https://opensource.org/licenses/MIT"
 
-LICENSE:
-  NAME: MIT License
-  URL:  https://opensource.org/licenses/MIT
+THEME_ICONS:
+  DEFAULT:  "📚"
+  DARK:     "🌙"
+  LIGHT:    "☀️"
 
+# THEME / COULEURS
 THEME:
-  PRIMARY_COLOR:  "#4f46e5"
-  SIDEBAR_TITLE:  "📘 Docs"
+  BG_MAIN:            "#1F1F2E"
+  BG_GRADIENT_START:  "#272739"
+  BG_GRADIENT_END:    "#3B3B55"
+  BG_PANEL:           "#2B2B42"
+  BG_SIDEBAR:         "#323256"
+  BG_HOVER:           "#3C3C6B"
+  ACCENT:             "#8A6FF7"
+  ACCENT_ALT:         "#F38BFF"
+  TEXT_MAIN:          "#E6E6FA"
+  TEXT_MUTED:         "#B0B0D0"
+  TEXT_SUBTLE:        "#8888AA"
+  BORDER_SOFT:        "#4A4A70"
+  RADIUS_LG:          "16px"
+  RADIUS_MD:          "6px"
+  TRANSITION_FAST:    "0.2s ease"
+  TRANSITION_NORMAL:  "0.3s ease"
