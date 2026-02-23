@@ -58,7 +58,12 @@ int main(void)
 
 	logInfo("Generating index.html", NULL);
 	generate_index_html(&config);
-	logSuccess("index.html generated", "docs/index.html");
+
+	logInfo("Generating style.css", NULL);
+	generate_style_css(&config);
+
+	logInfo("Generating main.js", NULL);
+	generate_main_js(&config);
 
 	return (EXIT_SUCCESS);
 }
