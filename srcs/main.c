@@ -33,7 +33,7 @@ int main(void)
 		return (logError("Output folder not found", config.runtime.output_folder), 1);
 
 	char manifestPath[4096];
-	snprintf(manifestPath, sizeof(manifestPath), "%s\\%s", config.runtime.output_folder, config.runtime.output_file);
+	snprintf(manifestPath, sizeof(manifestPath), "%s\\%s", config.runtime.output_folder, config.runtime.manifest_path);
 
 	FILE* fOut = fopen(manifestPath, "w");
 	if (!fOut)
