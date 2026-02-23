@@ -4,6 +4,22 @@ DESCRIPTION:  "Static Lua documentation generator"
 LICENSE_NAME: "MIT License"
 LICENSE_URL:  "https://opensource.org/licenses/MIT"
 
+# FILE AND FOLDER CONFIGURATION
+INPUT_FOLDER:   "docs_folder"
+OUTPUT_FOLDER:  "docs\\root"
+EXTENSION:      ".html"
+ROOT_PATH:       "docs/root"
+OUTPUT_FILE:    "manifest.js"
+INDENT_WIDTH:   2
+
+# CONSOL COLORS DEFINITIONS
+CONSOLE:
+  COLOR_RESET:    7
+  COLOR_SUCCESS:  10
+  COLOR_ERROR:    12
+  COLOR_INFO:     11
+
+# THEME ICONS DEFINITIONS
 THEME_ICONS:
   DEFAULT:  "📚"
   DARK:     "🌙"
