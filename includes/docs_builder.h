@@ -44,12 +44,23 @@ typedef struct Return
 
 typedef struct DocBlock
 {
-	char				name[128];
-	char				desc[512];
-	Param*				params;
-	Return*				returns;
-	struct DocBlock*	next;
+	char name[128];
+	char desc[1024];
+
+	char example_lang[32];
+	char example_code[4096];
+
+	Param* params;
+	Return* returns;
+
+	struct DocBlock* next;
 } DocBlock;
+
+typedef struct ParsedFile
+{
+	char global_description[4096];
+	DocBlock* blocks;
+} ParsedFile;
 
 typedef struct ThemeConfig
 {
@@ -87,6 +98,8 @@ typedef struct RuntimeConfig
 	char extension[32];
 	char exclude_file[128];
 	int  indent_width;
+	char manifest_path[256];
+	char main_js_path[256];
 
 	int  color_reset;
 	int  color_success;
@@ -137,8 +150,8 @@ void		logSuccess(const char *sMsg, const char *sDetail);
 //
 void		free_docblocks(DocBlock* head);
 void		create_directory_recursive(const char* path);
-DocBlock*	parse_doc_blocks(FILE* f);
-int			contains_doc_comment(const char* filepath);
+ParsedFile*	parse_doc_file(FILE* f);
+void		free_parsed_file(ParsedFile* file);
 void		write_docblock_html(FILE* fOut, DocBlock* doc);
 int			scan_and_create_docs(const char* base, const char* rel, const ProjectConfig* config);
 
