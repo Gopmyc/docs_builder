@@ -5,12 +5,14 @@ LICENSE_NAME: "MIT License"
 LICENSE_URL:  "https://opensource.org/licenses/MIT"
 
 # FILE AND FOLDER CONFIGURATION
-INPUT_FOLDER:   "docs_folder"
-OUTPUT_FOLDER:  "docs\\root"
+INPUT_FOLDER:   "docs_src"
+OUTPUT_FOLDER:  "docs"
 EXTENSION:      ".html"
-ROOT_PATH:       "docs/root"
+ROOT_PATH:      "docs/root"
 OUTPUT_FILE:    "manifest.js"
 INDENT_WIDTH:   2
+MANIFEST_PATH:  "docs/manifest.js"
+MAIN_JS_PATH:   "main.js"
 
 # CONSOL COLORS DEFINITIONS
 CONSOLE:
