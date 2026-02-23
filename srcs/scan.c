@@ -5,7 +5,7 @@
 // │ DOCS GENERATION SCAN │
 // └──────────────────────┘
 //
-int scan_and_create_docs(const char* base, const char* rel)
+int scan_and_create_docs(const char* base, const char* rel, const ProjectConfig* config)
 {
 	char searchPath[MAX_PATH];
 
@@ -30,11 +30,11 @@ int scan_and_create_docs(const char* base, const char* rel)
 			if (strlen(rel) == 0) { snprintf(newRel, sizeof(newRel), "%s", ffd.cFileName); }
 				else { snprintf(newRel, sizeof(newRel), "%s\\%s", rel, ffd.cFileName); }
 
-			int childHas	= scan_and_create_docs(base, newRel);
+			int childHas	= scan_and_create_docs(base, newRel, config);
 			if (childHas)
 			{
 				char fullOutputPath[MAX_PATH];
-				snprintf(fullOutputPath, sizeof(fullOutputPath), "%s\\%s", OUTPUT_FOLDER, newRel);
+				snprintf(fullOutputPath, sizeof(fullOutputPath), "%s\\%s", config->runtime.output_folder, newRel);
 				create_directory_recursive(fullOutputPath);
 
 				hasValidFile	= 1;
@@ -61,7 +61,7 @@ int scan_and_create_docs(const char* base, const char* rel)
 					fclose(fIn);
 
 					char outputDir[MAX_PATH];
-					strcpy(outputDir, OUTPUT_FOLDER);
+					strcpy(outputDir, config->runtime.output_folder);
 
 					if (strlen(rel) > 0) { strcat(outputDir, "\\"); strcat(outputDir, rel); }
 
@@ -69,7 +69,7 @@ int scan_and_create_docs(const char* base, const char* rel)
 
 					char outputFile[MAX_PATH];
 
-					strcpy(outputFile, OUTPUT_FOLDER);
+					strcpy(outputFile, config->runtime.output_folder);
 					strcat(outputFile, "\\");
 					strcat(outputFile, newRelFile);
 
