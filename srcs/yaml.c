@@ -37,6 +37,18 @@ static void assign_root_key(ProjectConfig* cfg, const char* key, const char* val
 		strncpy(cfg->license_name, value, sizeof(cfg->license_name) - 1);
 	else if (strcmp(key, "LICENSE_URL") == 0)
 		strncpy(cfg->license_url, value, sizeof(cfg->license_url) - 1);
+	else if (strcmp(key, "INPUT_FOLDER") == 0)
+		strncpy(cfg->runtime.input_folder, value, sizeof(cfg->runtime.input_folder) - 1);
+	else if (strcmp(key, "OUTPUT_FOLDER") == 0)
+		strncpy(cfg->runtime.output_folder, value, sizeof(cfg->runtime.output_folder) - 1);
+	else if (strcmp(key, "OUTPUT_FILE") == 0)
+		strncpy(cfg->runtime.output_file, value, sizeof(cfg->runtime.output_file) - 1);
+	else if (strcmp(key, "INDENT_WIDTH") == 0)
+		cfg->runtime.indent_width = atoi(value);
+	else if (strcmp(key, "EXTENSION") == 0)
+		strncpy(cfg->runtime.extension, value, sizeof(cfg->runtime.extension) - 1);
+	else if (strcmp(key, "ROOT_PATH") == 0)
+		strncpy(cfg->runtime.root_path, value, sizeof(cfg->runtime.root_path) - 1);
 }
 
 static void assign_child_key(ProjectConfig* cfg, const char* parent, const char* key, const char* value)
@@ -85,10 +97,22 @@ static void assign_child_key(ProjectConfig* cfg, const char* parent, const char*
 		else if (strcmp(key, "LIGHT") == 0)
 			cfg->themeIcons.lightIcon = strdup(value);
 	}
+	else if (strcmp(parent, "CONSOLE") == 0)
+	{
+		if (strcmp(key, "COLOR_RESET") == 0)
+			cfg->runtime.color_reset = atoi(value);
+		else if (strcmp(key, "COLOR_SUCCESS") == 0)
+			cfg->runtime.color_success = atoi(value);
+		else if (strcmp(key, "COLOR_ERROR") == 0)
+			cfg->runtime.color_error = atoi(value);
+		else if (strcmp(key, "COLOR_INFO") == 0)
+			cfg->runtime.color_info = atoi(value);
+	}
 }
 
 int load_config_yaml(const char* path, ProjectConfig* config)
 {
+	logInfo("Loading YAML config", "docs_config.yaml");
 	FILE* f = fopen(path, "r");
 	if (!f)
 		return 0;
@@ -139,6 +163,8 @@ int load_config_yaml(const char* path, ProjectConfig* config)
 	}
 
 	fclose(f);
+
+	logSuccess("Config loaded", NULL);
 
 	return 1;
 }
