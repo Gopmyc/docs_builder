@@ -10,7 +10,7 @@ OUTPUT_FOLDER:  "docs"
 EXTENSION:      ".html"
 ROOT_PATH:      "docs/root"
 INDENT_WIDTH:   2
-MANIFEST_PATH:  "manifest.js"
+MANIFEST_PATH:  "root/manifest.js"
 MAIN_JS_PATH:   "main.js"
 
 # CONSOL COLORS DEFINITIONS
