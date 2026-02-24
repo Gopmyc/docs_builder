@@ -7,11 +7,25 @@
 //
 void write_docblock_html(FILE* fOut, DocBlock* doc)
 {
+	char stateHtml[256] = "";
+	if (doc->state[0])
+	{
+		if (strcmp(doc->state, "CLIENT") == 0)
+			strcpy(stateHtml, "<span style='display:inline-block;width:12px;height:12px;background:#f1c40f;border-radius:6px;margin-right:8px;'></span>");
+		else if (strcmp(doc->state, "SERVER") == 0)
+			strcpy(stateHtml, "<span style='display:inline-block;width:12px;height:12px;background:#3498db;border-radius:6px;margin-right:8px;'></span>");
+		else if ((strcmp(doc->state, "CLIENT/SERVER") == 0) || (strcmp(doc->state, "SERVER/CLIENT") == 0))
+	strcpy(stateHtml,
+		"<span style='display:inline-block;width:12px;height:12px;margin-right:8px;border-radius:6px;"
+		"background:linear-gradient(135deg,#f1c40f 50%,#3498db 50%)'></span>");
+	}
+
 	fprintf(fOut,
 		"<section id=\"%s\">\n"
-		"<h2>%s</h2>\n"
+		"<h2>%s %s</h2>\n"
 		"<p>%s</p>\n",
 		doc->name[0] ? doc->name : "unnamed",
+		stateHtml,
 		doc->name[0] ? doc->name : "Unnamed",
 		doc->desc[0] ? doc->desc : "No description."
 	);
