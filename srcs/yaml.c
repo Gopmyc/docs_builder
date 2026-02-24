@@ -110,6 +110,13 @@ static void assign_child_key(ProjectConfig* cfg, const char* parent, const char*
 		else if (strcmp(key, "COLOR_INFO") == 0)
 			cfg->runtime.color_info = atoi(value);
 	}
+	else if (strcmp(parent, "COLORS_SIDE") == 0)
+	{
+		if (strcmp(key, "CLIENT") == 0)
+			strncpy(cfg->runtime.color_client, value, sizeof(cfg->runtime.color_client) - 1);
+		else if (strcmp(key, "SERVER") == 0)
+			strncpy(cfg->runtime.color_server, value, sizeof(cfg->runtime.color_server) - 1);
+	}
 }
 
 int load_config_yaml(const char* path, ProjectConfig* config)
