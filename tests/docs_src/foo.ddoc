@@ -4,6 +4,7 @@
 		The string parameter is ignored in the function logic.
 
 @NAME	: foo
+@STATE	:
 @DESC	: Test function for documentation generation
 @PARAM	:
 	- {boolean} : A boolean value to be returned by the function
