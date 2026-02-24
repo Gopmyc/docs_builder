@@ -95,6 +95,16 @@ ParsedFile* parse_doc_file(FILE* f)
 			strncpy(current->name, colon + 1, sizeof(current->name) - 1);
 			trim_trailing(current->name);
 		}
+		else if (strncmp(line, "@STATE", 6) == 0 && current)
+		{
+			char* val = colon + 1;
+			while (*val == ' ' || *val == '\t') val++;
+		
+			strncpy(current->state, val, sizeof(current->state) - 1);
+			current->state[sizeof(current->state) - 1] = '\0';
+		
+			trim_trailing(current->state);
+		}
 		else if (strncmp(line, "@DESC", 5) == 0 && current)
 		{
 			strncpy(current->desc, colon + 1, sizeof(current->desc) - 1);
