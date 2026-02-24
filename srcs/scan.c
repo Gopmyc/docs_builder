@@ -104,7 +104,7 @@ int scan_and_create_docs(const char* base, const char* rel, const ProjectConfig*
 					fprintf(fOut, "<p>%s</p>\n", parsed->global_description);
 
 				for (DocBlock* d = parsed->blocks; d; d = d->next)
-					write_docblock_html(fOut, d);
+					write_docblock_html(fOut, d, config);
 
 				fprintf(fOut,
 					"    </main>\n"
