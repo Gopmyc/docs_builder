@@ -107,6 +107,9 @@ typedef struct RuntimeConfig
 	int 	color_error;
 	int 	color_info;
 
+	char 	color_client[16];
+	char 	color_server[16];
+
 } RuntimeConfig;
 
 typedef struct ProjectConfig
@@ -161,7 +164,7 @@ void			free_docblocks(DocBlock* head);
 void			create_directory_recursive(const char* path);
 ParsedFile*		parse_doc_file(FILE* f);
 void			free_parsed_file(ParsedFile* file);
-void			write_docblock_html(FILE* fOut, DocBlock* doc);
+void			write_docblock_html(FILE* fOut, DocBlock* doc, const ProjectConfig* config);
 int				scan_and_create_docs(const char* base, const char* rel, const ProjectConfig* config, ManifestNode* manifest_root);
 
 //
