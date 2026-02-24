@@ -5,19 +5,28 @@
 // │ DOCS GENERATION WRITER │
 // └────────────────────────┘
 //
-void write_docblock_html(FILE* fOut, DocBlock* doc)
+void write_docblock_html(FILE* fOut, DocBlock* doc, const ProjectConfig* config)
 {
+	printf("Test color : %s, %s\n", config->runtime.color_client, config->runtime.color_server);
 	char stateHtml[256] = "";
 	if (doc->state[0])
 	{
 		if (strcmp(doc->state, "CLIENT") == 0)
-			strcpy(stateHtml, "<span style='display:inline-block;width:12px;height:12px;background:#f1c40f;border-radius:6px;margin-right:8px;'></span>");
+			snprintf(stateHtml, sizeof(stateHtml),
+				"<span style='display:inline-block;width:12px;height:12px;"
+				"background:%s;margin-right:8px;border-radius:6px;'></span>",
+				config->runtime.color_client);
 		else if (strcmp(doc->state, "SERVER") == 0)
-			strcpy(stateHtml, "<span style='display:inline-block;width:12px;height:12px;background:#3498db;border-radius:6px;margin-right:8px;'></span>");
+			snprintf(stateHtml, sizeof(stateHtml),
+				"<span style='display:inline-block;width:12px;height:12px;"
+				"background:%s;margin-right:8px;border-radius:6px;'></span>",
+				config->runtime.color_server);
 		else if ((strcmp(doc->state, "CLIENT/SERVER") == 0) || (strcmp(doc->state, "SERVER/CLIENT") == 0))
-	strcpy(stateHtml,
-		"<span style='display:inline-block;width:12px;height:12px;margin-right:8px;border-radius:6px;"
-		"background:linear-gradient(135deg,#f1c40f 50%,#3498db 50%)'></span>");
+			snprintf(stateHtml, sizeof(stateHtml),
+				"<span style='display:inline-block;width:12px;height:12px;margin-right:8px;"
+				"border-radius:6px;background:linear-gradient(135deg,%s 50%%,%s 50%%)'></span>",
+				config->runtime.color_client,
+				config->runtime.color_server);
 	}
 
 	fprintf(fOut,
