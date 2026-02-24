@@ -26,6 +26,11 @@ THEME_ICONS:
   DARK:     "🌙"
   LIGHT:    "☀️"
 
+# COLORS FOR CLIENT AND SERVER DOCS
+COLORS_SIDE:
+  CLIENT: "#f1c40f"
+  SERVER: "#3498db"
+
 # THEME / COULEURS
 THEME:
   BG_MAIN:            "#1F1F2E"
