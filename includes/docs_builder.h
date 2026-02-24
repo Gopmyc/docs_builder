@@ -50,6 +50,8 @@ typedef struct DocBlock
 	char			example_lang[32];
 	char			example_code[4096];
 
+	char			state[16];
+
 	Param			*params;
 	Return			*returns;
 
