@@ -90,7 +90,7 @@ flowchart TD
     E --> H[Generate main.js]
     H --> I[Sidebar + Theme + Search]
     F --> I
-````
+```
 
 ---
 
