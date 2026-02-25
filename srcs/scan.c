@@ -93,7 +93,7 @@ int scan_and_create_docs(const char* base, const char* rel, const ProjectConfig*
 					"</head>\n"
 					"<body>\n"
 					"<div class=\"container\">\n"
-					"	<aside class=\"sidebar\"> <h2>📘 %s </h2> <nav> <ul id=\"sidebar-menu\"></ul> </nav> </aside>\n"
+					"	<aside class=\"sidebar\"> <h2>📘 %s </h2> <div class=\"sidebar-search\"> <input type=\"text\" id=\"sidebarSearch\" placeholder=\"Search...\" /> </div>\n <nav> <ul id=\"sidebar-menu\"></ul> </nav> </aside>\n"
 					"   <main class=\"content\">\n",
 					prefix,
 					config->title,
