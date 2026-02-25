@@ -83,7 +83,7 @@ Internal workflow:
 flowchart TD
     A[Scan docs_src] --> B[Parse .ddoc files]
     B --> C[Extract @NAME, @DESC, @PARAM, @RETURN, @STATE, @EXAMPLE]
-    C --> D[Build Manifest (manifest.js)]
+    C --> D[Build Manifest - manifest.js]
     D --> E[Generate HTML pages in docs/pages]
     E --> F[Generate index.html]
     E --> G[Generate style.css]
