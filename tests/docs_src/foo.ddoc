@@ -15,20 +15,6 @@
 ```lua
 local result = foo(true, "This string will be ignored")
 print(result) -- Output: true
-BlaBlaBla
-BlaBlaBla
-BlaBlaBla
-BlaBlaBla
-BlaBlaBla
-BlaBlaBla
-BlaBlaBla
-BlaBlaBla
-BlaBlaBla
-jdhzauihdzaugd
-
-ozahdzudyiaz
-
-idhaiud
 ```
 
 @NAME	: bar
