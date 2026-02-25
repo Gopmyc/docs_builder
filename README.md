@@ -112,6 +112,7 @@ flowchart TD
 
 * Windows (uses WinAPI for scanning and directory handling)
 * C compiler (MSVC or MinGW recommended)
+* Python (optional, for running a local HTTP server)
 
 ### Installation
 
@@ -134,13 +135,26 @@ or (MinGW):
 gcc srcs/*.c -o docs_builder.exe
 ```
 
-3. Run:
+3. Run the executable:
 
 ```bash
 docs_builder.exe
 ```
 
 Make sure `docs_config.yaml` is present at root.
+
+### 4️⃣ Serve Documentation Locally
+
+> ⚠️ To properly view the generated documentation in your browser, you **must** serve it via a local HTTP server. Directly opening `index.html` may break navigation, sidebar, and JavaScript features.
+
+Example using Python:
+
+```bash
+cd docs
+python -m http.server 8080
+```
+
+Then open your browser at: `http://localhost:8080`
 
 ---
 
@@ -176,7 +190,6 @@ local v = AddVectors(a, b)
 > * `CLIENT` → uses the client color defined in `COLORS_SIDE.CLIENT`
 > * `SERVER` → uses the server color defined in `COLORS_SIDE.SERVER`
 > * `CLIENT/SERVER` → shows a combined badge for both states
-
 
 ### 2️⃣ Configure `docs_config.yaml`
 
@@ -238,8 +251,7 @@ THEME:
 
 ### 3️⃣ Generate Documentation
 
-Run the executable.
-Your static site will be generated in the output folder.
+Run the executable. Your static site will be generated in the output folder.
 
 ---
 
