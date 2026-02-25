@@ -6,9 +6,6 @@
 // └──────┘
 //
 
-// TODO: Create a version control system, a search bar, and a client/server differentiation system
-#include "docs_builder.h"
-
 static void extract_parent_dir(const char* fullPath, char* outDir, size_t outSize)
 {
 	const char* jsPos = strstr(fullPath, ".js");
