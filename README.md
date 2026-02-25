@@ -236,8 +236,6 @@ THEME:
   TRANSITION_NORMAL:  "0.3s ease"
 ```
 
-> All YAML keys are optional; customize theme colors, paths, and console settings.
-
 ### 3️⃣ Generate Documentation
 
 Run the executable.
