@@ -118,6 +118,7 @@ typedef struct ProjectConfig
 	char			description[512];
 	char			license_name[128];
 	char			license_url[256];
+	char			version[32];
 
 	ThemeConfig		theme;
 	ThemeIcons		themeIcons;
