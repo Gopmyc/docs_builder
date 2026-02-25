@@ -7,7 +7,6 @@
 //
 void write_docblock_html(FILE* fOut, DocBlock* doc, const ProjectConfig* config)
 {
-	printf("Test color : %s, %s\n", config->runtime.color_client, config->runtime.color_server);
 	char stateHtml[256] = "";
 	if (doc->state[0])
 	{
