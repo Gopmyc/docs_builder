@@ -34,6 +34,7 @@ void generate_index_html(const ProjectConfig* config)
 		"		<div class=\"container\">\n"
 		"			<aside class=\"sidebar\">\n"
 		"				<h2>📘 %s</h2>\n"
+		"				<div class=\"sidebar-search\"> <input type=\"text\" id=\"sidebarSearch\" placeholder=\"Search...\" /> </div>\n"
 		"				<nav>\n"
 		"					<ul id=\"sidebar-menu\"></ul>\n"
 		"				</nav>\n"
@@ -109,8 +110,12 @@ void generate_main_js(const ProjectConfig* config)
 "function buildSidebarMenu(manifest){if(!manifest){document.querySelector('.content').innerHTML=`<h1>Erreur</h1><p>Manifest introuvable ou invalide.</p>`;return;}const menuRoot=document.getElementById('sidebar-menu');menuRoot.innerHTML=`<li><a href=\"/index.html#intro\">Introduction</a></li>`;menuRoot.appendChild(buildMenu(manifest,'',false,0));menuRoot.innerHTML+=`<li><a href=\"/index.html#license\">License</a></li>`;\n"
 "document.querySelectorAll('.dropdown-toggle').forEach(btn=>{btn.addEventListener('click',e=>{e.preventDefault();const submenu=btn.nextElementSibling;submenu.classList.toggle('visible');btn.classList.toggle('active');});});\n"
 "document.querySelectorAll('.copy-btn').forEach(btn=>{btn.addEventListener('click',()=>{const code=btn.nextElementSibling.innerText;navigator.clipboard.writeText(code).then(()=>{btn.classList.add('copied');btn.innerText='✅';setTimeout(()=>{btn.classList.remove('copied');btn.innerText='📋';},1500);});});});\n"
-"const currentPath = window.location.pathname.split('/').pop() || 'index.html';\n"
-"const currentHash = window.location.hash.slice(1);\n"
+"/* ================= SEARCH SIDEBAR ================= */\n"
+"const searchInput=document.getElementById('sidebarSearch');\n"
+"if(searchInput){searchInput.addEventListener('keyup',()=>{const filter=searchInput.value.toLowerCase();document.querySelectorAll('.sidebar li').forEach(li=>{const link=li.querySelector('a');if(!link)return;const txt=link.textContent.toLowerCase();const match=txt.includes(filter);li.style.display=match?'':'none';if(match){let parent=li.parentElement.closest('li');while(parent){const btn=parent.querySelector('.dropdown-toggle');if(btn){btn.classList.add('active');btn.nextElementSibling.classList.add('visible');}parent=parent.parentElement.closest('li');}}});});}\n"
+"/* ================= ACTIVE SELECTION ================= */\n"
+"const currentPath=window.location.pathname.split('/').pop()||'index.html';\n"
+"const currentHash=window.location.hash.slice(1);\n"
 "document.querySelectorAll('.sidebar a').forEach(link=>{\n"
 "	const linkHref = link.getAttribute('href');\n"
 "	const linkPath = linkHref.split('#')[0].split('/').pop();\n"
@@ -209,6 +214,11 @@ void generate_style_css(const ProjectConfig* config)
 	fprintf(f,
 		"body, .sidebar, .content, .code-block, h1,h2,h3 { transition: background 0.3s ease, color 0.3s ease; }\n"
 		".theme-btn { width: 40px; height: 40px; border-radius: 50%%; border: none; font-size: 20px; cursor: pointer; transition: all 0.3s ease; }\n"
+	);
+
+	fprintf(f,
+		".sidebar-search{padding:5px 5px 5px 5px;box-sizing:border-box;}\n"
+		".sidebar-search input{width:100%%;padding:8px 10px;border-radius:var(--radius-md);border:1px solid var(--border-soft);background:var(--bg-panel);color:var(--text-main);font-size:0.9em;box-sizing:border-box;}\n"
 	);
 
 	fprintf(f,
