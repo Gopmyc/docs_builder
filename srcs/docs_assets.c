@@ -5,7 +5,6 @@
 // │ DOCS ASSETS GENERATOR │
 // └───────────────────────┘
 //
-
 void generate_index_html(const ProjectConfig* config)
 {
 	char path[MAX_PATH];
@@ -87,9 +86,9 @@ void generate_main_js(const ProjectConfig* config)
 	}
 
 	fprintf(f,
-"const defaultTheme={bgMain:getComputedStyle(document.documentElement).getPropertyValue('--bg-main').trim(),bgGradientStart:getComputedStyle(document.documentElement).getPropertyValue('--bg-gradient-start').trim(),bgGradientEnd:getComputedStyle(document.documentElement).getPropertyValue('--bg-gradient-end').trim(),bgPanel:getComputedStyle(document.documentElement).getPropertyValue('--bg-panel').trim(),bgSidebar:getComputedStyle(document.documentElement).getPropertyValue('--bg-sidebar').trim(),bgHover:getComputedStyle(document.documentElement).getPropertyValue('--bg-hover').trim(),accent:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),accentAlt:getComputedStyle(document.documentElement).getPropertyValue('--accent-alt').trim(),textMain:getComputedStyle(document.documentElement).getPropertyValue('--text-main').trim(),textMuted:getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim(),textSubtle:getComputedStyle(document.documentElement).getPropertyValue('--text-subtle').trim(),borderSoft:getComputedStyle(document.documentElement).getPropertyValue('--border-soft').trim()};\n"
-"const darkTheme={bgMain:'#111111',bgGradientStart:'#0F0F0F',bgGradientEnd:'#1C1C1C',bgPanel:'#1A1A1A',bgSidebar:'#1E1E1E',bgHover:'#2A2A2A',accent:'#9B5DE5',accentAlt:'#F15BB5',textMain:'#EEE',textMuted:'#CCC',textSubtle:'#BBB',borderSoft:'#333'};\n"
-"const lightTheme={bgMain:'#FFFFFF',bgGradientStart:'#F0F0F0',bgGradientEnd:'#E0E0E0',bgPanel:'#FFFFFF',bgSidebar:'#F8F8F8',bgHover:'#E5E5E5',accent:'#5D5DE5',accentAlt:'#F1BB55',textMain:'#111111',textMuted:'#333333',textSubtle:'#555555',borderSoft:'#DDD'};\n"
+"const defaultTheme={bgMain:getComputedStyle(document.documentElement).getPropertyValue('--bg-main').trim(),bgGradientStart:getComputedStyle(document.documentElement).getPropertyValue('--bg-gradient-start').trim(),bgGradientEnd:getComputedStyle(document.documentElement).getPropertyValue('--bg-gradient-end').trim(),bgPanel:getComputedStyle(document.documentElement).getPropertyValue('--bg-panel').trim(),bgSidebar:getComputedStyle(document.documentElement).getPropertyValue('--bg-sidebar').trim(),bgHover:getComputedStyle(document.documentElement).getPropertyValue('--bg-hover').trim(),accent:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),accentAlt:getComputedStyle(document.documentElement).getPropertyValue('--accent-alt').trim(),textMain:getComputedStyle(document.documentElement).getPropertyValue('--text-main').trim(),textMuted:getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim(),textSubtle:getComputedStyle(document.documentElement).getPropertyValue('--text-subtle').trim(),borderSoft:getComputedStyle(document.documentElement).getPropertyValue('--border-soft').trim(), dockBlock:getComputedStyle(document.documentElement).getPropertyValue('--dock-block').trim()};\n"
+"const darkTheme={bgMain:'#111111',bgGradientStart:'#0F0F0F',bgGradientEnd:'#1C1C1C',bgPanel:'#1A1A1A',bgSidebar:'#1E1E1E',bgHover:'#2A2A2A',accent:'#9B5DE5',accentAlt:'#F15BB5',textMain:'#EEE',textMuted:'#CCC',textSubtle:'#BBB',borderSoft:'#333', dockBlock:'#1a1919'};\n"
+"const lightTheme={bgMain:'#FFFFFF',bgGradientStart:'#F0F0F0',bgGradientEnd:'#E0E0E0',bgPanel:'#FFFFFF',bgSidebar:'#F8F8F8',bgHover:'#E5E5E5',accent:'#5D5DE5',accentAlt:'#F1BB55',textMain:'#111111',textMuted:'#333333',textSubtle:'#555555',borderSoft:'#DDD', dockBlock:'#b4b1b1'};\n"
 "function applyTheme(theme){for(const [k,v] of Object.entries(theme)){document.documentElement.style.setProperty('--'+k.replace(/[A-Z]/g,m=>'-'+m.toLowerCase()),v);}}\n"
 "const themes=['default','dark','light'];\n"
 "const icons=['%s','%s','%s'];\n"
@@ -187,6 +186,7 @@ void generate_style_css(const ProjectConfig* config)
 		"	--text-muted: %s;\n"
 		"	--text-subtle: %s;\n"
 		"	--border-soft: %s;\n"
+		"	--dock-block: %s;\n"
 		"	--radius-lg: %s;\n"
 		"	--radius-md: %s;\n"
 		"	--transition-fast: %s;\n"
@@ -205,6 +205,7 @@ void generate_style_css(const ProjectConfig* config)
 		config->theme.text_muted,
 		config->theme.text_subtle,
 		config->theme.border_soft,
+		config->theme.dock_block,
 		config->theme.radius_lg,
 		config->theme.radius_md,
 		config->theme.transition_fast,
@@ -214,14 +215,8 @@ void generate_style_css(const ProjectConfig* config)
 	fprintf(f,
 		"body, .sidebar, .content, .code-block, h1,h2,h3 { transition: background 0.3s ease, color 0.3s ease; }\n"
 		".theme-btn { width: 40px; height: 40px; border-radius: 50%%; border: none; font-size: 20px; cursor: pointer; transition: all 0.3s ease; }\n"
-	);
-
-	fprintf(f,
-		".sidebar-search{padding:5px 5px 5px 5px;box-sizing:border-box;}\n"
+		".sidebar-search{padding:5px;box-sizing:border-box;}\n"
 		".sidebar-search input{width:100%%;padding:8px 10px;border-radius:var(--radius-md);border:1px solid var(--border-soft);background:var(--bg-panel);color:var(--text-main);font-size:0.9em;box-sizing:border-box;}\n"
-	);
-
-	fprintf(f,
 		"body {margin:0;font-family:'Inter',sans-serif;background:linear-gradient(to right,var(--bg-gradient-start),var(--bg-gradient-end));color:var(--text-main);}\n"
 		".container{display:flex;width:100%%;min-height:100vh;}\n"
 		".sidebar{width:260px;background-color:var(--bg-sidebar);padding:20px;min-height:100vh;position:sticky;top:0;overflow-y:auto;}\n"
@@ -237,11 +232,25 @@ void generate_style_css(const ProjectConfig* config)
 		".submenu li a:hover{color:var(--text-main);}\n"
 		".dropdown-toggle::after{content:'▾';position:absolute;right:8px;top:50%%;transform:translateY(-50%%) rotate(0deg);transition:transform var(--transition-normal);font-size:0.8em;color:var(--accent);}\n"
 		".dropdown-toggle.active::after{transform:translateY(-50%%) rotate(180deg);}\n"
-		".content{flex:1;padding:40px;margin:0 auto;width:100%%;max-width:1000px;background:var(--bg-panel);box-shadow:0 0 20px rgba(155,93,229,0.08);border-radius:var(--radius-lg);}\n"
+		".content{flex:1;padding:40px;margin:0 auto;width:100%%;max-width:1000px;background:var(--bg-panel);box-shadow:0 4px 20px rgba(0,0,0,0.15);border-radius:var(--radius-lg);}\n"
 		"h1,h2,h3{color:var(--accent);margin-top:1.5em;}\n"
 		"h2{position:relative;padding-left:16px;}\n"
 		"h2::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:4px;background:linear-gradient(to bottom,var(--accent),var(--accent-alt));border-radius:2px;}\n"
 		"h2::after{content:' 🔍';font-size:0.8em;color:var(--accent);}\n"
+		".doc-block {padding:20px;margin-bottom:25px;background:linear-gradient(135deg, var(--dock-block) 0%%, var(--dock-block) 100%%);border-radius:var(--radius-lg);box-shadow:0 6px 20px rgba(0,0,0,0.18);border:1px solid var(--border-soft);}\n"
+		".state-dot {display:inline-block;width:12px;height:12px;border-radius:6px;margin-right:6px;vertical-align:middle;}\n"
+		".doc-subblock {padding:10px 15px;margin:10px 0 0 20px;border-left:3px solid var(--accent-alt);background:rgba(0,0,0,0.03);border-radius:var(--radius-md);transition:background 0.2s ease;}\n"
+		".doc-subblock:hover {background:rgba(0,0,0,0.06);}\n"
+		".param-type {display:inline-block;padding:3px 8px;margin-right:6px;border-radius:6px;font-size:0.85em;font-weight:bold;color:#fff;}\n"
+		".param-type.string {background:%s;}\n"
+		".param-type.number {background:%s;}\n"
+		".param-type.boolean {background:%s;}\n"
+		".param-type.function {background:%s;}\n"
+		".param-type.table {background:%s;}\n"
+		".param-type.any {background:%s;}\n"
+		".global-description { padding: 20px; margin: 20px 0; background: linear-gradient(135deg, var(--bg-panel), var(--bg-panel)); border-left: 5px solid var(--accent); border-radius: var(--radius-md); box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background 0.3s ease, color 0.3s ease; }\n"
+		".global-description h2 { margin-top: 0; color: var(--accent); font-size: 1.5em; }\n"
+		".global-description p { margin: 10px 0 0 0; line-height: 1.6; color: var(--text-subtle); }\n"
 		".code-block{position:relative;margin-top:10px;padding:12px;border-radius:var(--radius-md);border:1px solid var(--border-soft);background:linear-gradient(145deg,var(--bg-panel),#141414);animation:fadeInUp 0.4s ease;}\n"
 		"code{display:block;font-family:'Fira Code',monospace;color:var(--text-main);white-space:pre-wrap;}\n"
 		"pre code::selection{background:var(--accent);color:#000;}\n"
@@ -255,7 +264,13 @@ void generate_style_css(const ProjectConfig* config)
 		".meta li{margin-bottom:8px;padding-left:20px;transition:background-color var(--transition-fast);border-radius:3px;}\n"
 		".meta li:hover{background-color:var(--bg-hover);}\n"
 		".meta > li > strong{display:inline-block;margin-bottom:6px;}\n"
-		"@media (max-width:768px){.container{flex-direction:column;}.sidebar{width:100%%;min-height:auto;position:relative;}.content{padding:20px;border-radius:0;}}\n"
+		"@media (max-width:768px){.container{flex-direction:column;}.sidebar{width:100%%;min-height:auto;position:relative;}.content{padding:20px;border-radius:0;}}\n",
+		config->theme.type_string,
+		config->theme.type_number,
+		config->theme.type_boolean,
+		config->theme.type_function,
+		config->theme.type_table,
+		config->theme.type_default
 	);
 
 	fclose(f);
