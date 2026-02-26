@@ -67,18 +67,31 @@ typedef struct ParsedFile
 typedef struct ThemeConfig
 {
 	char	mode[16];
+
 	char	bg_main[16];
 	char	bg_gradient_start[16];
 	char	bg_gradient_end[16];
 	char	bg_panel[16];
 	char	bg_sidebar[16];
 	char	bg_hover[16];
+
 	char	accent[16];
 	char	accent_alt[16];
+
 	char	text_main[16];
 	char	text_muted[16];
 	char	text_subtle[16];
+
 	char	border_soft[16];
+	char	dock_block[16];
+
+	char	type_string[16];
+	char	type_number[16];
+	char	type_boolean[16];
+	char	type_function[16];
+	char	type_table[16];
+	char	type_default[16];
+
 	char	radius_lg[8];
 	char	radius_md[8];
 	char	transition_fast[16];
