@@ -83,6 +83,20 @@ static void assign_child_key(ProjectConfig* cfg, const char* parent, const char*
 			strncpy(cfg->theme.text_subtle, value, sizeof(cfg->theme.text_subtle) - 1);
 		else if (strcmp(key, "BORDER_SOFT") == 0)
 			strncpy(cfg->theme.border_soft, value, sizeof(cfg->theme.border_soft) - 1);
+		else if (strcmp(key, "DOCK_BLOCK") == 0)
+			strncpy(cfg->theme.dock_block, value, sizeof(cfg->theme.dock_block) - 1);
+		else if (strcmp(key, "TYPE_STRING") == 0)
+			strncpy(cfg->theme.type_string, value, sizeof(cfg->theme.type_string) - 1);
+		else if (strcmp(key, "TYPE_NUMBER") == 0)
+			strncpy(cfg->theme.type_number, value, sizeof(cfg->theme.type_number) - 1);
+		else if (strcmp(key, "TYPE_BOOLEAN") == 0)
+			strncpy(cfg->theme.type_boolean, value, sizeof(cfg->theme.type_boolean) - 1);
+		else if (strcmp(key, "TYPE_FUNCTION") == 0)
+			strncpy(cfg->theme.type_function, value, sizeof(cfg->theme.type_function) - 1);
+		else if (strcmp(key, "TYPE_TABLE") == 0)
+			strncpy(cfg->theme.type_table, value, sizeof(cfg->theme.type_table) - 1);
+		else if (strcmp(key, "TYPE_DEFAULT") == 0)
+			strncpy(cfg->theme.type_default, value, sizeof(cfg->theme.type_default) - 1);
 		else if (strcmp(key, "RADIUS_LG") == 0)
 			strncpy(cfg->theme.radius_lg, value, sizeof(cfg->theme.radius_lg) - 1);
 		else if (strcmp(key, "RADIUS_MD") == 0)
