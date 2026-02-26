@@ -271,10 +271,12 @@ Run the executable. Your static site will be generated in the output folder.
 * [x] YAML configuration injection
 * [x] CLIENT / SERVER state differentiation
 * [x] Sidebar search engine
+* [x] Multiline support in .ddoc documentation documents
+* [X] Insert a tab or block to provide clearer visual feedback indicating the parameter's affiliation or usage examples to the parent function.
+* [ ] Ability to shout within the tree view depending on the selected state: CLIENT, SERVER, CLIENT/SERVER
+* [ ] Syntax highlighting / colored support for .ddoc files in VSCode
 * [ ] Documentation versioning system
 * [ ] Cross-platform POSIX support
-* [ ] Markdown rendering support
-* [ ] Syntax highlighting / colored support for .ddoc files in VSCode
 
 <p align="right"><a href="#readme-top">🔝</a></p>
 
