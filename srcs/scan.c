@@ -101,7 +101,13 @@ int scan_and_create_docs(const char* base, const char* rel, const ProjectConfig*
 				);
 
 				if (parsed->global_description[0])
-					fprintf(fOut, "<p>%s</p>\n", parsed->global_description);
+					fprintf(fOut,
+						"<section class='global-description'>\n"
+						"	<h2>Overview</h2>\n"
+						"	<p>%s</p>\n"
+						"</section>\n",
+						parsed->global_description
+					);
 
 				for (DocBlock* d = parsed->blocks; d; d = d->next)
 					write_docblock_html(fOut, d, config);
