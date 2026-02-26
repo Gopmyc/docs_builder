@@ -1,7 +1,10 @@
-@GLOBAL_DESCRIPTION	: This file contains the documentation for the 'foo' function,
+@GLOBAL_DESCRIPTION	:
+{
+	This file contains the documentation for the 'foo' function,
 	which is used to test the documentation generation process.
 	The function takes a boolean and a string as parameters and returns the boolean value.
-		The string parameter is ignored in the function logic.
+	The string parameter is ignored in the function logic.
+}
 
 @NAME	: foo
 @STATE	: SERVER/CLIENT
