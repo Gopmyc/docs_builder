@@ -429,6 +429,12 @@ See [`LICENSE`](https://github.com/Gopmyc/docs_builder/LICENSE) for details.
 
 ---
 
+## ✅ Credits
+
+* `logo.png` – Portable Document Format icon by [Bharat Icons](https://www.flaticon.com/free-icons/portable-document-format) on Flaticon
+
+---
+
 [contributors-shield]: https://img.shields.io/github/contributors/Gopmyc/docs_builder.svg?style=for-the-badge
 [contributors-url]: https://github.com/Gopmyc/docs_builder/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Gopmyc/docs_builder.svg?style=for-the-badge
