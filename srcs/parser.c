@@ -156,7 +156,13 @@ ParsedFile* parse_doc_file(FILE* f)
 			continue;
 		}
 
-		if (line[0] != '@') continue;
+		char* p = line;
+		while (*p == ' ' || *p == '\t') p++;
+
+		if (strncmp(p, "##", 2) == 0)
+			continue;
+
+		if (*p != '@') continue;
 		char* colon = strchr(line, ':');
 		if (!colon) continue;
 
@@ -178,39 +184,69 @@ ParsedFile* parse_doc_file(FILE* f)
 			read_field_with_optional_multiline(f, line, colon, current->desc, sizeof(current->desc));
 		else if (strncmp(line, "@RETURN", 7) == 0 && current)
 		{
-			while (fgets(line, sizeof(line), f))
+			long pos;
+		
+			while (1)
 			{
-				if (line[0] == '\n' || line[0] == '@') break;
+				pos = ftell(f);
+			
+				if (!fgets(line, sizeof(line), f))
+					break;
+			
+				if (line[0] == '\n' || line[0] == '@')
+				{
+					fseek(f, pos, SEEK_SET);
+					break;
+				}
+			
 				char* o = strchr(line, '<');
 				char* c = strchr(line, '>');
 				char* col = strchr(line, ':');
 				if (!o || !c || !col) continue;
-
+			
 				Return* r = calloc(1, sizeof(Return));
+			
 				size_t len = c - o - 1;
 				strncpy(r->type, o + 1, len);
 				r->type[len] = 0;
+			
 				strncpy(r->desc, col + 1, sizeof(r->desc) - 1);
 				trim_trailing(r->desc);
+			
 				append_return(current, r);
 			}
 		}
 		else if (strncmp(line, "@PARAM", 6) == 0 && current)
 		{
-			while (fgets(line, sizeof(line), f))
+			long pos;
+		
+			while (1)
 			{
-				if (line[0] == '\n' || line[0] == '@') break;
+				pos = ftell(f);
+			
+				if (!fgets(line, sizeof(line), f))
+					break;
+			
+				if (line[0] == '\n' || line[0] == '@')
+				{
+					fseek(f, pos, SEEK_SET);
+					break;
+				}
+			
 				char* o = strchr(line, '<');
 				char* c = strchr(line, '>');
 				char* col = strchr(line, ':');
 				if (!o || !c || !col) continue;
-
+			
 				Param* p = calloc(1, sizeof(Param));
+			
 				size_t len = c - o - 1;
 				strncpy(p->type, o + 1, len);
 				p->type[len] = 0;
+			
 				strncpy(p->desc, col + 1, sizeof(p->desc) - 1);
 				trim_trailing(p->desc);
+			
 				append_param(current, p);
 			}
 		}
