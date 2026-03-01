@@ -1,17 +1,18 @@
 # PROJET
-TITLE:        "Docs Builder"
-DESCRIPTION:  "Static Lua documentation generator"
-LICENSE_NAME: "MIT License"
-LICENSE_URL:  "https://opensource.org/licenses/MIT"
+TITLE:            "Docs Builder"
+DESCRIPTION:      "Static Lua documentation generator"
+LICENSE_NAME:     "MIT License"
+LICENSE_URL:      "https://opensource.org/licenses/MIT"
+PROJECT_URL_BASE: ""
 
 # FILE AND FOLDER CONFIGURATION
-INPUT_FOLDER:   "docs_src"
-OUTPUT_FOLDER:  "docs"
-EXTENSION:      ".html"
-ROOT_PATH:      "docs/root"
-INDENT_WIDTH:   2
-MANIFEST_PATH:  "root/manifest.js"
-MAIN_JS_PATH:   "main.js"
+INPUT_FOLDER:     "docs_src"
+OUTPUT_FOLDER:    "docs"
+EXTENSION:        ".html"
+ROOT_PATH:        "docs/root"
+INDENT_WIDTH:     2
+MANIFEST_PATH:    "root/manifest.js"
+MAIN_JS_PATH:     "main.js"
 
 # CONSOL COLORS DEFINITIONS
 CONSOLE:
