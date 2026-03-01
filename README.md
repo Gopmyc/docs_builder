@@ -168,6 +168,7 @@ Example (`example.ddoc`):
 @GLOBAL_DESCRIPTION:
 This module handles vector math.
 
+## This is a comment ignored by the parser
 @NAME: AddVectors
 @STATE: CLIENT/SERVER
 @DESC: Adds two vectors.
@@ -273,6 +274,7 @@ Run the executable. Your static site will be generated in the output folder.
 * [x] Sidebar search engine
 * [x] Multiline support in .ddoc documentation documents
 * [X] Insert a tab or block to provide clearer visual feedback indicating the parameter's affiliation or usage examples to the parent function.
+* [X] Comment management
 * [ ] Ability to shout within the tree view depending on the selected state: CLIENT, SERVER, CLIENT/SERVER
 * [ ] Syntax highlighting / colored support for .ddoc files in VSCode
 * [ ] Documentation versioning system
