@@ -164,7 +164,7 @@ Then open your browser at: `http://localhost:8080`
 
 Example (`example.ddoc`):
 
-````text
+````ruby
 @GLOBAL_DESCRIPTION:
 This module handles vector math.
 
@@ -173,11 +173,11 @@ This module handles vector math.
 @DESC: Adds two vectors.
 
 @PARAM:
-{Vector} : First vector
-{Vector} : Second vector
+<Vector> : First vector
+<Vector> : Second vector
 
 @RETURN:
-{Vector} : Result vector
+<Vector> : Result vector
 
 @EXAMPLE:
 ```lua
