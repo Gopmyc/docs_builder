@@ -114,6 +114,7 @@ typedef struct RuntimeConfig
 	int 	indent_width;
 	char	manifest_path[256];
 	char	main_js_path[256];
+	char	url_base[256];
 
 	int 	color_reset;
 	int 	color_success;
