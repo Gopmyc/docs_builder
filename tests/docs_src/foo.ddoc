@@ -10,10 +10,10 @@
 @STATE	: SERVER/CLIENT
 @DESC	: Test function for documentation generation
 @PARAM	:
-	- {boolean} : A boolean value to be returned by the function
-	- {string} : A string value to be ignored by the function
+	<boolean> : A boolean value to be returned by the function
+	<string> : A string value to be ignored by the function
 @RETURN	:
-	- {boolean} : The boolean value passed as a parameter
+	<boolean> : The boolean value passed as a parameter
 @EXAMPLE	:
 ```lua
 local result = foo(true, "This string will be ignored")
@@ -23,10 +23,10 @@ print(result) -- Output: true
 @NAME	: bar
 @DESC	: Another test function for documentation generation
 @PARAM	:
-	- {boolean} : A boolean value to be returned by the function
-	- {string} : A string value to be ignored by the function
+	<boolean> : A boolean value to be returned by the function
+	<string> : A string value to be ignored by the function
 @RETURN	:
-	- {boolean} : The boolean value passed as a parameter
+	<boolean> : The boolean value passed as a parameter
 @EXAMPLE	:
 ```lua
 local result = bar(false, "This string will also be ignored")
