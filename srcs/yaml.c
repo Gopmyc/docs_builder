@@ -53,6 +53,8 @@ static void assign_root_key(ProjectConfig* cfg, const char* key, const char* val
 		strncpy(cfg->runtime.main_js_path, value, sizeof(cfg->runtime.main_js_path) - 1);
 	else if (strcmp(key, "VERSION") == 0)
 		strncpy(cfg->version, value, sizeof(cfg->version) - 1);
+	else if (strcmp(key, "PROJECT_URL_BASE") == 0)
+		strncpy(cfg->runtime.url_base, value, sizeof(cfg->runtime.url_base) - 1);
 }
 
 static void assign_child_key(ProjectConfig* cfg, const char* parent, const char* key, const char* value)
