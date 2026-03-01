@@ -162,7 +162,6 @@ ParsedFile* parse_doc_file(FILE* f)
 
 		if (strncmp(line, "@GLOBAL_DESCRIPTION", 19) == 0)
 			read_field_with_optional_multiline(f, line, colon, parsed->global_description, sizeof(parsed->global_description));
-
 		else if (strncmp(line, "@NAME", 5) == 0)
 		{
 			current = calloc(1, sizeof(DocBlock));
@@ -173,40 +172,17 @@ ParsedFile* parse_doc_file(FILE* f)
 			strncpy(current->name, val, sizeof(current->name) - 1);
 			trim_trailing(current->name);
 		}
-
 		else if (strncmp(line, "@STATE", 6) == 0 && current)
 			read_field_with_optional_multiline(f, line, colon, current->state, sizeof(current->state));
-
 		else if (strncmp(line, "@DESC", 5) == 0 && current)
 			read_field_with_optional_multiline(f, line, colon, current->desc, sizeof(current->desc));
-
-		else if (strncmp(line, "@PARAM", 6) == 0 && current)
-		{
-			while (fgets(line, sizeof(line), f))
-			{
-				if (line[0] == '\n' || line[0] == '@') break;
-				char* o = strchr(line, '{');
-				char* c = strchr(line, '}');
-				char* col = strchr(line, ':');
-				if (!o || !c || !col) continue;
-
-				Param* p = calloc(1, sizeof(Param));
-				size_t len = c - o - 1;
-				strncpy(p->type, o + 1, len);
-				p->type[len] = 0;
-				strncpy(p->desc, col + 1, sizeof(p->desc) - 1);
-				trim_trailing(p->desc);
-				append_param(current, p);
-			}
-		}
-
 		else if (strncmp(line, "@RETURN", 7) == 0 && current)
 		{
 			while (fgets(line, sizeof(line), f))
 			{
 				if (line[0] == '\n' || line[0] == '@') break;
-				char* o = strchr(line, '{');
-				char* c = strchr(line, '}');
+				char* o = strchr(line, '<');
+				char* c = strchr(line, '>');
 				char* col = strchr(line, ':');
 				if (!o || !c || !col) continue;
 
@@ -219,7 +195,25 @@ ParsedFile* parse_doc_file(FILE* f)
 				append_return(current, r);
 			}
 		}
+		else if (strncmp(line, "@PARAM", 6) == 0 && current)
+		{
+			while (fgets(line, sizeof(line), f))
+			{
+				if (line[0] == '\n' || line[0] == '@') break;
+				char* o = strchr(line, '<');
+				char* c = strchr(line, '>');
+				char* col = strchr(line, ':');
+				if (!o || !c || !col) continue;
 
+				Param* p = calloc(1, sizeof(Param));
+				size_t len = c - o - 1;
+				strncpy(p->type, o + 1, len);
+				p->type[len] = 0;
+				strncpy(p->desc, col + 1, sizeof(p->desc) - 1);
+				trim_trailing(p->desc);
+				append_param(current, p);
+			}
+		}
 		else if (strncmp(line, "@EXAMPLE", 8) == 0 && current)
 		{
 			if (fgets(line, sizeof(line), f))
